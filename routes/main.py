@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request
+import os
 
 # Import calculator logic
 from calculators.emi import calculate_emi
@@ -8,6 +9,7 @@ from calculators.age import calculate_age
 from calculators.bmi import calculate_bmi
 from calculators.sip import calculate_sip
 from calculators.cgpa import calculate_cgpa
+from flask import Blueprint, send_from_directory
 
 
 main = Blueprint("main", __name__)
@@ -120,10 +122,11 @@ def privacy():
 @main.route("/terms")
 def terms():
     return render_template("terms.html")
+
 @main.route('/sitemap.xml')
 def sitemap():
-    return send_from_directory('.', 'sitemap.xml')
+    return send_from_directory(os.path.abspath(os.path.dirname(__file__) + "/../"), 'sitemap.xml')
 
 @main.route('/robots.txt')
 def robots():
-    return send_from_directory('.', 'robots.txt')
+    return send_from_directory(os.path.abspath(os.path.dirname(__file__) + "/../"), 'robots.txt')
