@@ -120,3 +120,10 @@ def privacy():
 @main.route("/terms")
 def terms():
     return render_template("terms.html")
+@main.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory('.', 'sitemap.xml')
+
+@main.route('/robots.txt')
+def robots():
+    return send_from_directory('.', 'robots.txt')
